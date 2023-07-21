@@ -1,107 +1,79 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
-using System.Collections.Generic;
+using static System.Console;
 
 namespace HomeWork
 {
     class Program
     {
-        static void Main()
+        public static void Main()
         {
-            Task2();
-            //Task4();
-            //Task6();
-            //Task8();
+            Task10();
+            //Task13();
+            //Task15();
         }
-
         /// <summary>
-        /// Задача № 2
+        /// Задача № 10
         /// </summary>
-        static void Task2()
+        static void Task10()
         {
-            Console.Write("Введите первое число: ");
-            var firstNumber = Convert.ToInt16(Console.ReadLine());  // Вводится певое число
-            Console.Write("Введите второе число: ");
-            var secondNumber = Convert.ToInt16(Console.ReadLine());  // Вводится второе число
-
-            // Если первое число больше второго
-            if (firstNumber > secondNumber)
+            Write("Введите трехзначное число: ");
+            string inputNumber = ReadLine(); // Ввод трехзначного числа
+            // Проверка числа на трехзначность
+            if (inputNumber.Length != 3 || string.IsNullOrWhiteSpace(inputNumber))
             {
-                Console.WriteLine("Большее число: " + firstNumber); // Выводится первое число
+                while (inputNumber.Length != 3 || string.IsNullOrWhiteSpace(inputNumber))
+                {
+                    Write("Ошибка. Введите трехзначное число: ");
+                    inputNumber = ReadLine(); // Ввод трехзначного число
+                }
+            }
+            int result = (Convert.ToInt16(inputNumber) / 10) % 10;
+            WriteLine("Ответ: " + result); // Вывод второй цифры числа, или второго символа строки
+        }
+        /// <summary>
+        /// Задача № 13
+        /// </summary>
+        static void Task13()
+        {
+            Write("Введите число: ");
+            int inputNumber = Convert.ToInt16(ReadLine()); // Ввод числа
+            // Если при делении на 100 число не равно нулю
+            if ((inputNumber/100)!=0)
+            {
+                while(inputNumber>999) // Пока число больше 999
+                {
+                    inputNumber=inputNumber/10; // Число делится на 10
+                }
+                WriteLine(inputNumber%10); // Вывод ответа
+            }
+            else // В ином случае ответ, что третьей цифры нет
+            {
+                WriteLine("Третьей цифры нет.");
+            }
+        }
+        /// <summary>
+        /// Задача № 15
+        /// </summary>
+        static void Task15()
+        {
+            Write("Введите число, обозначающее день недели: ");
+            int weekdayNumber = Convert.ToInt16(ReadLine()); // Ввод числа
+            WriteLine("Введенное число является выходным днем?");
+            // Если число равно 6 или 7
+            if (weekdayNumber is 6 or 7)
+            {
+                WriteLine("Да."); // то положительный ответ
+            }
+            // Нсли число внутри диапазона значений 1-5
+            else if (weekdayNumber >= 1 && weekdayNumber <= 5)
+            {
+                WriteLine("Нет."); // то отрицательный ответ
             }
             else
             {
-                Console.WriteLine("Большее число: " + secondNumber); // Выводится второе число
+                WriteLine("Ошибка. Это число не обозначает день недели."); // При всех других сообщениях выводится сообщение об ошибке
             }
-        }
-
-        /// <summary>
-        /// Задача № 4
-        /// </summary>
-        static void Task4()
-        {
-            Console.Write("Введите первое число: ");
-            var firstNumber = Convert.ToInt16(Console.ReadLine());  // Вводится певое число
-            Console.Write("Введите второе число: ");
-            var secondNumber = Convert.ToInt16(Console.ReadLine());  // Вводится второе число
-            Console.Write("Введите третье число: ");
-            var thirdNumber = Convert.ToInt16(Console.ReadLine());  // Вводится второе число
-            var maxNumber = firstNumber; // Берем значение первого числа для максимального
-
-            // Если максимальное число меньше второго
-            if (maxNumber < secondNumber)
-            {
-                maxNumber = secondNumber; // Берем значение второго числа
-            }
-            // Если максимальное число меньше третьего
-            if (maxNumber < thirdNumber)
-            {
-                maxNumber = thirdNumber; // Берем значение третьего числа
-            }
-            Console.WriteLine("Максимальное число: " + maxNumber); // Выводим максимальное число
-        }
-
-        /// <summary>
-        /// Задача № 6
-        /// </summary>
-        static void Task6()
-        {
-            Console.Write("Введите число: ");
-            var number = Convert.ToInt16(Console.ReadLine());  // Вводится певое число
-            Console.WriteLine("Число четное?");
-
-            // Если число делятся на 2
-            if (number % 2 == 0)
-            {
-                Console.WriteLine("Да");
-            }
-            else // Иначе
-            {
-                Console.WriteLine("Нет");
-            }
-        }
-
-        /// <summary>
-        /// Задача № 8
-        /// </summary>
-        static void Task8()
-        {
-            Console.Write("Введите число: ");
-            var number = Convert.ToInt16(Console.ReadLine());  // Вводится певое число
-            int[] array = new int[number];  // Объявление массива
-            List<int> evenNumbersList = new List<int>(); // Объявление списка для четных чисел
-            var arrayFirstElement = 1;  // Значение первого элемента массива
-            //Заполнение массива
-            for (int i = 0; i < number; i++)
-            {
-                array[i] = arrayFirstElement++;
-                // Если элемента массива четный
-                if (array[i] % 2 == 0)
-                {
-                    evenNumbersList.Add(array[i]); // Элемент добавляется в список
-                }
-            }
-            Console.WriteLine(String.Join(", ", evenNumbersList)); // Вывод списка в виде строки
         }
     }
 }
