@@ -8,71 +8,100 @@ namespace HomeWork
     {
         public static void Main()
         {
-            Task10();
-            //Task13();
-            //Task15();
+            Task19();    
+            //Task21();
+            //Task23();
         }
         /// <summary>
-        /// Задача № 10
+        /// Задача № 19
         /// </summary>
-        static void Task10()
+        static void Task19()
         {
-            Write("Введите трехзначное число: ");
-            string inputNumber = ReadLine(); // Ввод трехзначного числа
-            // Проверка числа на трехзначность
-            if (inputNumber.Length != 3 || string.IsNullOrWhiteSpace(inputNumber))
+            Write("Является ли число полиномом? Введите пятизначное число: ");
+            string inputNumber = ReadLine(); //Ввод пятизначного числа
+            if (inputNumber.Length != 5 || string.IsNullOrWhiteSpace(inputNumber)) // Если число не пятизначное
             {
-                while (inputNumber.Length != 3 || string.IsNullOrWhiteSpace(inputNumber))
+                // Будет выводиться сообщение об ошибке, пока пользователь не введет пятизначное число
+                while (inputNumber.Length != 5)
                 {
-                    Write("Ошибка. Введите трехзначное число: ");
-                    inputNumber = ReadLine(); // Ввод трехзначного число
+                    Write("Ошибка. Введите пятизначное число: ");
+                    inputNumber = ReadLine();
                 }
             }
-            int result = (Convert.ToInt16(inputNumber) / 10) % 10;
-            WriteLine("Ответ: " + result); // Вывод второй цифры числа, или второго символа строки
-        }
-        /// <summary>
-        /// Задача № 13
-        /// </summary>
-        static void Task13()
-        {
-            Write("Введите число: ");
-            int inputNumber = Convert.ToInt16(ReadLine()); // Ввод числа
-            // Если при делении на 100 число не равно нулю
-            if ((inputNumber/100)!=0)
+            // Если цифры числа равны: вторая=четвертая, первая=пятая
+            if (inputNumber[1] == inputNumber[3] && inputNumber[0] == inputNumber[4])
             {
-                while(inputNumber>999) // Пока число больше 999
-                {
-                    inputNumber=inputNumber/10; // Число делится на 10
-                }
-                WriteLine(inputNumber%10); // Вывод ответа
-            }
-            else // В ином случае ответ, что третьей цифры нет
-            {
-                WriteLine("Третьей цифры нет.");
-            }
-        }
-        /// <summary>
-        /// Задача № 15
-        /// </summary>
-        static void Task15()
-        {
-            Write("Введите число, обозначающее день недели: ");
-            int weekdayNumber = Convert.ToInt16(ReadLine()); // Ввод числа
-            WriteLine("Введенное число является выходным днем?");
-            // Если число равно 6 или 7
-            if (weekdayNumber is 6 or 7)
-            {
-                WriteLine("Да."); // то положительный ответ
-            }
-            // Нсли число внутри диапазона значений 1-5
-            else if (weekdayNumber >= 1 && weekdayNumber <= 5)
-            {
-                WriteLine("Нет."); // то отрицательный ответ
+                WriteLine("Да."); // То положительный ответ
             }
             else
             {
-                WriteLine("Ошибка. Это число не обозначает день недели."); // При всех других сообщениях выводится сообщение об ошибке
+                WriteLine("Нет."); // Иначе отрицательный ответ
+            }
+        }
+        /// <summary>
+        /// Задача № 21
+        /// </summary>
+        static void Task21()
+        {
+            char[] dividers = { ',', ' ' }; // Массив с разделителями между координатами точек
+            Write("Введите координаты точки А через пробел или запятую: ");
+            string pointACoordinates = ReadLine(); // Ввод координат точки А
+            Write("Введите координаты точки В через пробел или запятую: ");
+            string pointBCoordinates = ReadLine(); // Ввод координат точки В
+            // Если вместо координат точки А пустая строка
+            if (string.IsNullOrWhiteSpace(pointACoordinates))
+            {
+                // Пока строка оставется пустой
+                while (string.IsNullOrWhiteSpace(pointACoordinates))
+                {
+                    Write("Ошибка. Введите координаты точки А: ");
+                    pointACoordinates = ReadLine(); // Ввод координат точки А
+                }
+            }
+            //Если вместо координат точки В пустая строка
+            if (string.IsNullOrWhiteSpace(pointBCoordinates))
+            {
+                // Пока пустая строка
+                while (string.IsNullOrWhiteSpace(pointBCoordinates))
+                {
+                    Write("Ошибка. Введите координаты точки B: ");
+                    pointBCoordinates = ReadLine(); // Ввод координат точки B
+                }
+            }
+
+            string[] pointACoordinatesArray = pointACoordinates.Split(dividers); // Удаление разделителей между координатами точки А
+            string[] pointBCoordinatesArray = pointBCoordinates.Split(dividers); // Удаление разделителей между координатами точки В
+
+            //Вычиление расстояния между точками А и В
+            double pointX = Math.Pow(Convert.ToDouble(pointBCoordinatesArray[0]) - Convert.ToDouble(pointACoordinatesArray[0]), 2);
+            double pointY = Math.Pow(Convert.ToDouble(pointBCoordinatesArray[1]) - Convert.ToDouble(pointACoordinatesArray[1]), 2);
+            double pointZ = Math.Pow(Convert.ToDouble(pointBCoordinatesArray[2]) - Convert.ToDouble(pointACoordinatesArray[2]), 2);
+
+            double pointDistance = Math.Pow((pointX + pointY + pointZ), 0.5);
+            WriteLine("Результат: {0:0.00}", pointDistance); // Вывод расстояния
+        }
+        /// <summary>
+        /// Задача № 23
+        /// </summary>
+        static void Task23()
+        {
+            Write("Введите число: ");
+            string inputNumber = ReadLine(); // Ввод числа
+            // Если строка пустая или число меньше 1
+            if (string.IsNullOrWhiteSpace(inputNumber) || Convert.ToInt16(inputNumber) < 1)
+            {
+                // Пока не исправлена ошибка, надо будет вводить числа
+                while (string.IsNullOrWhiteSpace(inputNumber) || Convert.ToInt16(inputNumber) < 1)
+                {
+                    Write("Ошибка. Введите корректное число: ");
+                    inputNumber = ReadLine(); // Ввод числа
+                }
+            }
+            // Вычисление и выыод таблицы кубов чисел
+            WriteLine($"Таблица кубов числе от 1 до {inputNumber}");
+            for (int i = 1; i <= Convert.ToInt16(inputNumber); i++)
+            {
+                WriteLine($"{i}-" + Math.Pow(i, 3));
             }
         }
     }
