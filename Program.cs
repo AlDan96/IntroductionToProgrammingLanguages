@@ -1,15 +1,15 @@
-﻿using System;
-using static System.Console;
+﻿// See https://aka.ms/new-console-template for more information
+using System;
 
 namespace HomeWork
 {
     public class Program
     {
-       public static void Main()
+        public static void Main()
         {
-           new Task25();
-           //new Task27();
-           //new Task29();
+            new Task34();
+            //new Task36();
+            //new Task38();
         }
     }
 }
