@@ -7,9 +7,8 @@ namespace HomeWork
     {
         public static void Main()
         {
-            new Task34();
-            //new Task36();
-            //new Task38();
+            new Task41();
+            //new Task43();
         }
     }
 }
